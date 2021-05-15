@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OrderActivity">
+
+    <CheckBox
+        android:id="@+id/cbCerveza"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="40dp"
+        android:text="Cerveza"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbSoda"
+        tools:ignore="HardcodedText" />
+
+    <CheckBox
+        android:id="@+id/cbRice"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="60dp"
+        android:text="Rice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/cbBeef"
+        app:layout_constraintTop_toBottomOf="@+id/txtFillings"
+        tools:ignore="HardcodedText" />
+
+    <CheckBox
+        android:id="@+id/cbBeans"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="60dp"
+        android:text="Beans"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/cbChicken"
+        app:layout_constraintTop_toBottomOf="@+id/cbRice"
+        tools:ignore="HardcodedText" />
+
+    <CheckBox
+        android:id="@+id/cbSeaFood"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="40dp"
+        android:text="Seafood Big"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbCheese"
+        tools:ignore="HardcodedText" />
+
+    <CheckBox
+        android:id="@+id/cbFish"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="40dp"
+        android:text="White Fish"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbChicken"
+        tools:ignore="HardcodedText" />
+
+    <CheckBox
+        android:id="@+id/cbChicken"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="40dp"
+        android:text="Chicken"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbBeef"
+        tools:ignore="HardcodedText" />
+
+    <CheckBox
+        android:id="@+id/cbGuaca"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="60dp"
+        android:text="Guacamole"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/cbCheese"
+        app:layout_constraintTop_toBottomOf="@+id/cbPico"
+        tools:ignore="HardcodedText" />
+
+    <CheckBox
+        android:id="@+id/cbBeef"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="40dp"
+        android:text="Beef"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtFillings"
+        tools:ignore="HardcodedText" />
+
+    <CheckBox
+        android:id="@+id/cbLBT"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="60dp"
+        android:text="LBT"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/cbSeaFood"
+        app:layout_constraintTop_toBottomOf="@+id/cbGuaca"
+        tools:ignore="HardcodedText" />
+
+    <CheckBox
+        android:id="@+id/cbPico"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="60dp"
+        android:text="Pico de Gallo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/cbFish"
+        app:layout_constraintTop_toBottomOf="@+id/cbBeans"
+        tools:ignore="HardcodedText" />
+
+    <CheckBox
+        android:id="@+id/cbCheese"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="40dp"
+        android:text="Cheese"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbFish"
+        tools:ignore="HardcodedText" />
+
+    <CheckBox
+        android:id="@+id/cbMargarita"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="60dp"
+        android:text="Margarita"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtBeverage"
+        tools:ignore="HardcodedText" />
+
+    <CheckBox
+        android:id="@+id/cbTequila"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="60dp"
+        android:text="Tequila"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbMargarita"
+        tools:ignore="HardcodedText" />
+
+    <CheckBox
+        android:id="@+id/cbSoda"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="40dp"
+        android:text="Soda"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtBeverage"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/txtSize"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/textview_border"
+        android:gravity="center"
+        android:text="Size"
+        app:layout_constraintEnd_toStartOf="@+id/txtTortilla"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgMain"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/txtBeverage"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="500dp"
+        android:background="@drawable/textview_border"
+        android:gravity="center"
+        android:text="Beverage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/txtFillings"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="250dp"
+        android:background="@drawable/textview_border"
+        android:gravity="center"
+        android:text="Fillings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/txtTortilla"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="50dp"
+        android:background="@drawable/textview_border"
+        android:gravity="center"
+        android:text="Tortilla"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtSize"
+        app:layout_constraintTop_toBottomOf="@+id/imgMain"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btnPlaceOrder"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="#4CAF50"
+        android:text="Place Your Order"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <RadioGroup
+        android:id="@+id/rdgpSize"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtSize">
+
+        <RadioButton
+            android:id="@+id/rbtnLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Large"
+            tools:ignore="HardcodedText" />
+
+        <RadioButton
+            android:id="@+id/rbtnMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Medium"
+            tools:ignore="HardcodedText" />
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/rbgrTortilla"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/rdgpSize"
+        app:layout_constraintTop_toBottomOf="@+id/txtTortilla">
+
+        <RadioButton
+            android:id="@+id/rbtnCorn"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Corn"
+            tools:ignore="HardcodedText" />
+
+        <RadioButton
+            android:id="@+id/rbtnFlour"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Flour"
+            tools:ignore="HardcodedText" />
+    </RadioGroup>
+
+    <ImageView
+        android:id="@+id/imgMain"
+        android:layout_width="180dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="40dp"
+        android:src="@drawable/tacos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/txtNameFood"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Taco Pronto"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgMain"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/txtDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="123 Eculid Ave"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgMain"
+        app:layout_constraintTop_toBottomOf="@+id/txtNameFood"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/txtPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phone: 5556"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imgMain"
+        app:layout_constraintTop_toBottomOf="@+id/txtDetails"
+        tools:ignore="HardcodedText" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
