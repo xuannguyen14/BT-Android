@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context="com.example.candfconverter.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:text="Temperature Converter"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+
+        <EditText
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="40dp"
+            android:hint="Độ C"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edittf"
+            android:text=""
+            />
+
+        <EditText
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="30dp"
+            android:hint="Độ F"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edittc"
+            android:text=""
+            />
+
+        <Button
+            android:id="@+id/ftoc"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:text="F to C"
+            android:textSize="10pt"
+            app:backgroundTint="#4CAF50" />
+
+        <Button
+            android:id="@+id/ctof"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="C to F"
+            android:textSize="10pt"
+            app:backgroundTint="#4CAF50" />
+
+        <Button
+            android:id="@+id/clear_text"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="Clear"
+            android:textSize="10pt"
+            app:backgroundTint="#4CAF50" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/History"
+                android:text=""
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                ></TextView>
+        </ScrollView>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="114dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="TextView" />
+
+</LinearLayout>
