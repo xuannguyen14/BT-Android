@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     String contentS = "";
     ArrayList<Nation> nations;
     TextView txtName, txtPopulation, txtArea;
-    ImageView imgNationFlag;
+    ImageView imgNationFlag, imgCountry;
     Button btnOk;
 
     @Override
@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         txtPopulation = (TextView) dialog.findViewById(R.id.txtPopulation);
         txtArea = (TextView) dialog.findViewById(R.id.txtArea);
         imgNationFlag = dialog.findViewById(R.id.imgNationalFlag);
+        imgCountry = dialog.findViewById(R.id.imgCountry);
         btnOk = dialog.findViewById(R.id.btnOk);
 
         btnOk.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // load ảnh từ link trên internet
                 new NationFlag().execute(nations.get(position).getNational_flag());
+                new CountryImage().execute(nations.get(position).getNation_img());
                 txtPopulation.setText("Population: " + Integer.parseInt(nations.get(position).getPopulation()));
                 txtArea.setText("Area: " + Float.parseFloat(nations.get(position).getArea()) + " km²");
 
@@ -129,12 +131,14 @@ public class MainActivity extends AppCompatActivity {
 
             for (int i = 0; i < arrCountryName.length(); i++) {
                 JSONObject objectName = arrCountryName.getJSONObject(i);
-                String countryCode = objectName.getString("countryCode").toLowerCase();
+                String countryCode = objectName.getString("countryCode");
                 Nation nation = new Nation();
 
                 nation.setName(objectName.getString("countryName"));
-                String urlImg = "https://img.geonames.org/flags/l/" + countryCode + ".gif";
-                nation.setNational_flag(urlImg);
+                String urlFlag = "https://img.geonames.org/flags/l/" + countryCode.toLowerCase() + ".gif";
+                String urlCountry = "https://img.geonames.org/img/country/250/" + countryCode + ".png";
+                nation.setNational_flag(urlFlag);
+                nation.setNation_img(urlCountry);
                 nation.setPopulation(objectName.getString("population"));
                 nation.setArea(objectName.getString("areaInSqKm"));
 
@@ -173,6 +177,34 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(Bitmap bitmap) {
             super.onPostExecute(bitmap);
             imgNationFlag.setImageBitmap(bitmap);
+        }
+    }
+
+    private class CountryImage extends AsyncTask<String, Void, Bitmap>{
+        Bitmap bitmap = null;
+
+        @Override
+        protected Bitmap doInBackground(String... strings) {
+            try {
+                //khai báo một đường dẫn nhận vào tham số của mảng strings mặc định
+                URL url = new URL(strings[0]);
+                // lấy dữ liệu từ URL
+                InputStream inputStream = url.openConnection().getInputStream();
+                //đổ dữ liệu ra bitmap để decode về
+                bitmap = BitmapFactory.decodeStream(inputStream);
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return bitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmap);
+            imgCountry.setImageBitmap(bitmap);
         }
     }
 }

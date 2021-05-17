@@ -7,14 +7,16 @@ public class Nation {
     private String national_flag; // quốc kỳ
     private String population; // dân số
     private String area; // diện tích
+    private String nation_img;
 
     public Nation(){}
 
-    public Nation(String name, String national_flag, String population, String area) {
+    public Nation(String name, String national_flag, String population, String area, String nation_img) {
         this.name = name;
         this.national_flag = national_flag;
         this.population = population;
         this.area = area;
+        this.nation_img = nation_img;
     }
 
     public String getName() {
@@ -47,5 +49,13 @@ public class Nation {
 
     public void setArea(String area) {
         this.area = area;
+    }
+
+    public String getNation_img() {
+        return nation_img;
+    }
+
+    public void setNation_img(String nation_img) {
+        this.nation_img = nation_img;
     }
 }
