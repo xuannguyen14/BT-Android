@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Daily Selfie</string>
+    <string name="channel_name">Daily Selfie</string>
+    <string name="channel_description">It is selfie time!</string>
+</resources>
