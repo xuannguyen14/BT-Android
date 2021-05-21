@@ -18,13 +18,16 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.selfieapp.DataModel.SelfieImage;
+
 import java.util.ArrayList;
+
+import static com.example.selfieapp.DataModel.DataConverter.convertImage2ByteArray;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -62,19 +65,22 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    // xin quyền mở camera
     // lấy hình chụp từ camera
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(requestCode == REQUEST_CODE_CAMERA && resultCode == RESULT_OK && data != null){
             Bitmap bitmap = (Bitmap) data.getExtras().get("data"); // default
             int s = 1;
-            images.add(new SelfieImage("image " + s, bitmap));
+            if(bitmap != null) {
+                images.add(new SelfieImage("image " + s, convertImage2ByteArray(bitmap)));
+            }
             s++;
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    //kiem tra cau tra loi cua user khi nguoi dung bam tra loi
+
+
+    // xin quyền mở camera, kiem tra cau tra loi cua user khi nguoi dung bam tra loi
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if(requestCode == REQUEST_CODE_CAMERA && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){

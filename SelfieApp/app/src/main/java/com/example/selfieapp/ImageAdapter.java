@@ -4,13 +4,16 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.selfieapp.DataModel.SelfieImage;
+
 import java.util.List;
+
+import static com.example.selfieapp.DataModel.DataConverter.convertByteArray2Image;
+import static com.example.selfieapp.DataModel.DataConverter.convertImage2ByteArray;
 
 public class ImageAdapter extends BaseAdapter {
     private Context context;
@@ -64,7 +67,7 @@ public class ImageAdapter extends BaseAdapter {
         // gan gia tri
         SelfieImage selfieImage = images.get(position);
         holder.txtName.setText(selfieImage.getName());
-        holder.imgSelfie.setImageBitmap(selfieImage.getImage());
+        holder.imgSelfie.setImageBitmap(convertByteArray2Image(selfieImage.getImage()));
 
         return convertView;
     }
