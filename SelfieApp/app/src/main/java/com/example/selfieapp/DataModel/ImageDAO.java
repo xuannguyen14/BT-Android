@@ -1,13 +1,16 @@
 package com.example.selfieapp.DataModel;
 
+import androidx.room.Dao;
+import androidx.room.Insert;
 import androidx.room.Query;
 
 import java.util.List;
 
-public class ImageDAO {
-    @Query("Select * from Images")
-    List<SelfieImage> getAllImages() {
-        return null;
-    }
+@Dao
+public interface ImageDAO {
+    @Query("SELECT * FROM images")
+    List<SelfieImage> getAll();
 
+    @Insert
+    void insertAll(SelfieImage... images);
 }

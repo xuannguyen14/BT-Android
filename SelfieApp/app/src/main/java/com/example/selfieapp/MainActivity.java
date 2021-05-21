@@ -5,10 +5,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
+import androidx.room.Room;
 
 import android.Manifest;
 import android.app.AlarmManager;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -16,6 +18,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Menu;
@@ -23,9 +26,14 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.selfieapp.DataModel.ImageDAO;
+import com.example.selfieapp.DataModel.ImageDatabase;
 import com.example.selfieapp.DataModel.SelfieImage;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 import static com.example.selfieapp.DataModel.DataConverter.convertImage2ByteArray;
 
@@ -33,22 +41,47 @@ public class MainActivity extends AppCompatActivity {
 
     ListView lvImage;
     int REQUEST_CODE_CAMERA = 123;
-    ArrayList<SelfieImage> images;
+    List<SelfieImage> images;
     ImageAdapter imageAdapter;
-    int NOTIFICATION_ID = 1;
+    ImageDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // su dung room database de luu anh da chup va lay anh trong database
+        db = Room.databaseBuilder(getApplicationContext(),
+                ImageDatabase.class, "Database").allowMainThreadQueries().build();
+        ImageDAO imageDAO = db.imageDAO();
+
         lvImage = findViewById(R.id.listImage);
         images = new ArrayList<>();
+        images = imageDAO.getAll();
+
         imageAdapter = new ImageAdapter(this, R.layout.image_row, images);
         lvImage.setAdapter(imageAdapter);
 
-        sendNotification();
+        // notification
+        NotificationChannel();
+        // Announcement at 00:24p every day
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 24);
+        calendar.set(Calendar.SECOND, 00);
 
+        if(Calendar.getInstance().after(calendar)){
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+        }
+
+        Intent intent = new Intent(MainActivity.this, MemoBroadcast.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+        }
     }
 
     @Override
@@ -60,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         //mở camera
-        alarmNotification();
         ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.CAMERA}, REQUEST_CODE_CAMERA);
         return super.onOptionsItemSelected(item);
     }
@@ -69,15 +101,25 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(requestCode == REQUEST_CODE_CAMERA && resultCode == RESULT_OK && data != null){
             Bitmap bitmap = (Bitmap) data.getExtras().get("data"); // default
-            int s = 1;
+            SelfieImage selfieImage = new SelfieImage();
+
             if(bitmap != null) {
-                images.add(new SelfieImage("image " + s, convertImage2ByteArray(bitmap)));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    selfieImage.setName("image " + (LocalDateTime.now()));
+                }
+                selfieImage.setImage(convertImage2ByteArray(bitmap));
+                images.add(selfieImage);
+                addImage(selfieImage);
+
             }
-            s++;
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+     private void addImage(SelfieImage selfieImage){
+         ImageDAO imageDAO = db.imageDAO();
+         imageDAO.insertAll(selfieImage);
+     }
 
 
     // xin quyền mở camera, kiem tra cau tra loi cua user khi nguoi dung bam tra loi
@@ -92,32 +134,18 @@ public class MainActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
-    private void sendNotification() {
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+    private void NotificationChannel(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("Notification", name, importance);
+            channel.setDescription(description);
 
-        Notification notification = new NotificationCompat.Builder(this, NotificationClass.CHANNEL_ID)
-                .setContentTitle("Notification")
-                .setContentText("It's selfie time!")
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setLargeIcon(bitmap)
-                .build();
-
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        if(notificationManager != null) {
-            notificationManager.notify(NOTIFICATION_ID, notification);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            if(notificationManager != null) {
+                notificationManager.createNotificationChannel(channel);
+            }
         }
-    }
-
-    private void alarmNotification(){
-        // Display Android notification at a particular time with Alarm Manager
-        Intent intent = new Intent(MainActivity.this, NotificationClass.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent, 0);
-
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-
-        long timeStart = System.currentTimeMillis();
-        long tenSecondsInMillis = 1000 * 10;
-
-        alarmManager.set(AlarmManager.RTC_WAKEUP, timeStart + tenSecondsInMillis, pendingIntent);
     }
 }
