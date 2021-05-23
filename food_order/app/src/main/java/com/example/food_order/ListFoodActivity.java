@@ -7,16 +7,20 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListFoodActivity extends AppCompatActivity {
 
     ListView lvFood;
     ArrayList<Food> foodArrayList;
     FoodAdapter adapter;
+    TextView txtOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +28,15 @@ public class ListFoodActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_food);
 
         init();
+
+        txtOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent toOrderAct = new Intent(ListFoodActivity.this, OrderActivity.class);
+
+                startActivity(toOrderAct);
+            }
+        });
 
         adapter = new FoodAdapter(this, R.layout.food_row, foodArrayList);
         lvFood.setAdapter(adapter);
@@ -43,5 +56,6 @@ public class ListFoodActivity extends AppCompatActivity {
         foodArrayList.add(new Food("Lemon-Lime Cake", R.drawable.lemonlimecake, "https://www.bettycrocker.com/recipes/lemon-lime-checkerboard-cake/9ba32e15-746f-485d-a41a-3a66d3c8557b", R.drawable.lemonlimecake2));
         foodArrayList.add(new Food("Chocolate Cupcakes", R.drawable.cupcakes, "https://www.bettycrocker.com/recipes/chocolate-covered-valentines-day-stroopwafel-cupcakes/f2977402-b541-4a4b-a8a4-b2cc2c48b198", R.drawable.cupcakes2));
 
+        txtOrder = findViewById(R.id.txtOrder);
     }
 }

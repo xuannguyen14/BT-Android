@@ -15,6 +15,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
@@ -76,6 +80,19 @@ public class FoodAdapter extends BaseAdapter {
         Food food = foodList.get(position);
         holder.txtNameBig.setText(food.getNameFoodBig());
         holder.imgFoodBig.setImageResource(food.getImageFoodBig());
+
+        String search = food.getNameFoodBig();
+        search = search.replace(' ', '+');
+        String finalSearch = search;
+
+        holder.imgFoodBig.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent toWebsite = new Intent(Intent.ACTION_VIEW);
+                toWebsite.setData(Uri.parse("https://www.google.com/search?q=" + finalSearch));
+                context.startActivity(toWebsite);
+            }
+        });
 
         holder.txtNameBig.setOnClickListener(new View.OnClickListener() {
             @Override

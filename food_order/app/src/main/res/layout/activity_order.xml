@@ -294,6 +294,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Taco Pronto"
+        android:textColor="#4CAF50"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -321,5 +322,19 @@
         app:layout_constraintStart_toEndOf="@+id/imgMain"
         app:layout_constraintTop_toBottomOf="@+id/txtDetails"
         tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/txtListfood"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        android:text="List food ->"
+        android:textColor="#4CAF50"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnPlaceOrder" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
