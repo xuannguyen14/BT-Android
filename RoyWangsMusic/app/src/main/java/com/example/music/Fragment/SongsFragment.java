@@ -1,0 +1,40 @@
+package com.example.music.Fragment;
+
+import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.example.music.Adapter.MusicAdapter;
+import com.example.music.MainActivity;
+import com.example.music.R;
+
+public class SongsFragment extends Fragment {
+
+    RecyclerView recyclerView;
+    public static MusicAdapter musicAdapter;
+
+    public SongsFragment() {
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view =  inflater.inflate(R.layout.fragment_songs, container, false);
+        recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        if(!(MainActivity.musicFiles.size() < 1)) {
+            musicAdapter = new MusicAdapter(getContext(), MainActivity.musicFiles);
+            recyclerView.setAdapter(musicAdapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
+        }
+        return view;
+    }
+}
