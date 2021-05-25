@@ -66,8 +66,8 @@ public class MainActivity extends AppCompatActivity {
         NotificationChannel();
         // Announcement at 00:24p every day
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 9);
-        calendar.set(Calendar.MINUTE, 46);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 24);
         calendar.set(Calendar.SECOND, 00);
 
         if(Calendar.getInstance().after(calendar)){

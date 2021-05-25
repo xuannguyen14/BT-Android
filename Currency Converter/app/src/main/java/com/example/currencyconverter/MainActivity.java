@@ -80,8 +80,8 @@ public class MainActivity extends AppCompatActivity {
                     {
                         value.clearFocus();
                         new GetDataCurrency().execute(listCountryCode.get(spnFrom.getSelectedItem().toString()));
-            }
-        }
+                    }
+                }
             }
         });
     }

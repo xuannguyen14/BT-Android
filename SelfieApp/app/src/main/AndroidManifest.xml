@@ -17,6 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SelfieApp"
         tools:ignore="Instantiatable">
+        <activity android:name=".NotificationOpen"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
