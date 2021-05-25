@@ -1,25 +1,18 @@
 package com.example.selfieapp;
 
-import android.app.Application;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-
-import com.example.selfieapp.NotificationOpen;
-import com.example.selfieapp.R;
 
 
 public class MemoBroadcast extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        Intent repeating_Intent = new Intent(context, NotificationOpen.class);
+        Intent repeating_Intent = new Intent(context, MainActivity.class);
         repeating_Intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, repeating_Intent, PendingIntent.FLAG_UPDATE_CURRENT);

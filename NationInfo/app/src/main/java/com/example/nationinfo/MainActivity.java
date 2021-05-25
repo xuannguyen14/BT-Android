@@ -28,8 +28,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -74,6 +76,9 @@ public class MainActivity extends AppCompatActivity {
 
         new ReadJSON().execute("http://api.geonames.org/countryInfoJSON?username=khoaht");
 
+        // format number
+        NumberFormat numberFormat = NumberFormat.getInstance();
+        Locale localeVN = new Locale("vi", "VN");
         lvCountry.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -82,8 +87,18 @@ public class MainActivity extends AppCompatActivity {
                 // load ảnh từ link trên internet
                 new NationFlag().execute(nations.get(position).getNational_flag());
                 new CountryImage().execute(nations.get(position).getNation_img());
-                txtPopulation.setText("Population: " + Integer.parseInt(nations.get(position).getPopulation()));
-                txtArea.setText("Area: " + Float.parseFloat(nations.get(position).getArea()) + " km²");
+
+                // format population
+                int population = Integer.parseInt(nations.get(position).getPopulation());
+                float area = Float.parseFloat(nations.get(position).getArea());
+                NumberFormat vn = NumberFormat.getInstance(localeVN);
+                String popu = vn.format(population);
+                String areaF = vn.format(area);
+
+                txtPopulation.setText("Population: " + popu);
+                //txtPopulation.setText("Population: " + Integer.parseInt(nations.get(position).getPopulation()));
+                txtArea.setText("Area: " + areaF + " km²");
+                //txtArea.setText("Area: " + Float.parseFloat(nations.get(position).getArea()) + " km²");
 
                 dialog.show();
             }
